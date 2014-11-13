@@ -1,0 +1,11 @@
+django>=1.5.1
+wheel==0.24.0
+# Additional requirements go here
+
+factory_boy
+
+#-e git://github.com/publica-io/django-publica-menus.git#egg=django-publica-menus
+#-e git://github.com/publica-io/django-publica-channels.git#egg=django-publica-channels
+#-e git://github.com/publica-io/django-publica-positions.git#egg=django-publica-positions
+#-e git://github.com/publica-io/django-publica-images.git#egg=django-publica-images
+-e git://github.com/publica-io/django-entropy.git#egg=django-entropy
