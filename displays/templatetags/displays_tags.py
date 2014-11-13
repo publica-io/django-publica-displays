@@ -4,12 +4,12 @@ from displays.models import Display
 
 register = template.Library()
 
-@register.inclusion_tag('displays/display_content.html')
+@register.inclusion_tag('displays/default.html')
 def display(slug):
 
     try:
-        content = Display.objects.get(slug=slug).contents
+        display = Display.objects.get(slug=slug).contents
     except Display.DoesNotExist:
-        content = None
+        display = None
 
-    return {'content': content}
+    return {'display': display }
