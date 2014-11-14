@@ -49,7 +49,7 @@ class Display(AttributeMixin, EnabledMixin, TitleMixin, SlugMixin):
         '''
         The method will render if db template is present or else just use default template and render
         '''
-        template = get_template(self.template.db_template if self.template else 'displays/default.html')
+        template = get_template(self.template.name if self.template else 'displays/default.html')
         return template.render(Context({'display': self}))
 
 
