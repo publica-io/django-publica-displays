@@ -17,6 +17,8 @@ try:
             "django.contrib.contenttypes",
             "django.contrib.sites",
             "displays",
+            'templates',
+            'entropy'
         ],
         SITE_ID=1,
         NOSE_ARGS=['-s'],

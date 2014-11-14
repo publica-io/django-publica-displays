@@ -9,3 +9,4 @@ factory_boy
 #-e git://github.com/publica-io/django-publica-positions.git#egg=django-publica-positions
 #-e git://github.com/publica-io/django-publica-images.git#egg=django-publica-images
 -e git://github.com/publica-io/django-entropy.git#egg=django-entropy
+-e git://github.com/publica-io/django-publica-templates.git#egg=django-publica-templates

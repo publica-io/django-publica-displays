@@ -3,6 +3,7 @@ from django.contrib.contenttypes import generic
 from django.template import Context
 from django.template.loader import get_template
 
+from templates.mixins import TemplateMixin
 
 from entropy.base import (
     AttributeMixin, EnabledMixin, OrderingMixin, TitleMixin, SlugMixin
@@ -25,7 +26,7 @@ from settings import CONTENT_MODELS
 #         return self.links.values_list('pk', flat=True)
 
 
-class Display(AttributeMixin, EnabledMixin, TitleMixin, SlugMixin):
+class Display(AttributeMixin, EnabledMixin, TitleMixin, SlugMixin, TemplateMixin):
     '''
     A Display of Content or Widgets with a given template.
 
@@ -33,8 +34,6 @@ class Display(AttributeMixin, EnabledMixin, TitleMixin, SlugMixin):
     '''
 
     blurb = models.TextField(blank=True, default='')
-
-    template = models.ForeignKey('templates.Template', null=True)
 
     def contents(self):
         '''
@@ -44,14 +43,6 @@ class Display(AttributeMixin, EnabledMixin, TitleMixin, SlugMixin):
             content for content in
             self.content_set.enabled().prefetch_related('content_object')
         ]
-
-    def render(self):
-        '''
-        The method will render if db template is present or else just use default template and render
-        '''
-        template = get_template(self.template.name if self.template else 'displays/default.html')
-        return template.render(Context({'display': self}))
-
 
 
 class Content(EnabledMixin, OrderingMixin):
@@ -83,3 +74,6 @@ class Content(EnabledMixin, OrderingMixin):
             # If no render method exists; inspect the object for some fields and try
             # to render a suitable preview.
 
+
+class Displayable(TemplateMixin, TitleMixin, SlugMixin):
+    pass

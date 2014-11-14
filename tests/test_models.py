@@ -14,6 +14,7 @@ import unittest
 
 from displays import models
 from displays import factories
+from displays.templatetags.displays_tags import display
 
 
 class TestDisplays(unittest.TestCase):
@@ -38,3 +39,17 @@ class TestDisplays(unittest.TestCase):
 
     def tearDown(self):
         pass
+
+
+# class TestDisplayable(unittest.TestCase):
+#
+#     def setUp(self):
+#         self.displayable = factories.DisplayableFactory()
+#         print self.displayable
+#
+#     # def test_display_tag(self):
+#
+#
+#
+#     def tearDown(self):
+#         pass
