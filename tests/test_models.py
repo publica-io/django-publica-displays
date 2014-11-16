@@ -8,10 +8,11 @@ test_django-publica-displays
 Tests for `django-publica-displays` models module.
 """
 
-import os
-import shutil
 import unittest
 
+from django.contrib.contenttypes.models import ContentType
+
+from templates.models import Template
 from displays import models
 from displays import factories
 from displays.templatetags.displays_tags import display
@@ -41,15 +42,81 @@ class TestDisplays(unittest.TestCase):
         pass
 
 
-# class TestDisplayable(unittest.TestCase):
-#
-#     def setUp(self):
-#         self.displayable = factories.DisplayableFactory()
-#         print self.displayable
-#
-#     # def test_display_tag(self):
-#
-#
-#
-#     def tearDown(self):
-#         pass
+class TestDisplayable(unittest.TestCase):
+    '''
+    A displayable is a made up of one or more displayable which is linked to a display through content type
+     _________________________________________________
+    |Display  |            |  |           |           |
+    |         | Displayable|  |Displayable|           |
+    |         |            |  |           |           |
+    |         |            |  |           |           |
+    |          ------------    -----------            |
+     -------------------------------------------------
+    '''
+
+    def setUp(self):
+        self.t1, _ = Template.objects.get_or_create(
+            name='templates/test.html', content='detail')
+        self.t2, _ = Template.objects.get_or_create(
+            name='templates/test_preview.html', content='preview')
+
+        self.display = models.Display(title='Title1',
+                               short_title='Shorty',
+                               enabled=False,
+                               blurb='This is big blurb..',
+                               slug='home')
+        self.display.template = self.t1
+        self.display.preview_template = self.t2
+        self.display.save()
+
+
+    def test_display_tag(self):
+        self.assertEqual('test', display('home'))
+
+
+    def test_display_created(self):
+
+        self.t1, _ = Template.objects.get_or_create(
+            name='displays/default.html', content='')
+
+        self.display = models.Display(title='Test2',
+                               short_title='Shorty',
+                               enabled=True,
+                               blurb='This is big blurb..',
+                               slug='MainTest')
+        self.display.template = self.t1
+        self.display.preview_template = self.t1
+        self.display.save()
+
+        self.t2, _ = Template.objects.get_or_create(
+            name='displays/test.html', content='')
+
+        self.t2.save()
+
+        for x in range(10):
+            # Create a displayable with some stuff.
+            self.displayable = models.Displayable(short_title='short title',
+                                                  enabled=True,
+                                                  slug='slug'
+            )
+            self.displayable.template = self.t2
+            self.displayable.preview_template = self.t2
+            self.displayable.save()
+            # Create the linkage between the Display and Displayble though content
+            self.content = models.Content(display=self.display,
+                                          content_type=ContentType.objects.get_for_model(self.displayable),
+                                          object_id=self.displayable.id)
+            self.content.save()
+
+        self.assertTrue('display-MainTest' in display('MainTest'))
+
+    def test_template_rendered(self):
+        self.assertTrue('This is a test html template for content displayble' in display('MainTest'))
+
+    def test_template_rendered_count(self):
+        self.assertEqual(display('MainTest').count('This is a test html template for content displayble'), 10)
+
+
+    def tearDown(self):
+        pass
+        # models.Display.objects.all().delete()

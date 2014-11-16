@@ -6,7 +6,7 @@ from django.template.loader import get_template
 from templates.mixins import TemplateMixin
 
 from entropy.base import (
-    AttributeMixin, EnabledMixin, OrderingMixin, TitleMixin, SlugMixin
+    AttributeMixin, EnabledMixin, OrderingMixin, TitleMixin, SlugMixin, TextMixin
 )
 
 from settings import CONTENT_MODELS
@@ -41,8 +41,9 @@ class Display(AttributeMixin, EnabledMixin, TitleMixin, SlugMixin, TemplateMixin
         '''
         return [
             content for content in
-            self.content_set.enabled().prefetch_related('content_object')
+            self.content_set.prefetch_related('content_object')
         ]
+
 
 
 class Content(EnabledMixin, OrderingMixin):
@@ -75,5 +76,5 @@ class Content(EnabledMixin, OrderingMixin):
             # to render a suitable preview.
 
 
-class Displayable(TemplateMixin, TitleMixin, SlugMixin):
+class Displayable(TemplateMixin, TitleMixin, SlugMixin, TextMixin, EnabledMixin):
     pass

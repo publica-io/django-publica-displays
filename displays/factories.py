@@ -2,7 +2,7 @@ import random
 import string
 import factory
 
-from models import Display, Displayable
+from models import Display, Displayable, Content
 from templates.models import Template
 
 class DisplayFactory(factory.Factory):
@@ -14,6 +14,17 @@ class DisplayFactory(factory.Factory):
     enabled = random.random < 0.6
     blurb = factory.Sequence(lambda n: 'blurb%d' % n)
     slug = factory.Sequence(lambda n: 'slug%d' % n)
+
+class ContentFactory(factory.Factory):
+    class Meta:
+        model = Content
+
+    display = DisplayFactory()
+
+    content_type = None
+    object_id = 0
+    enabled = True
+    content_object = None
 
 
 class TemplateFactory(factory.Factory):
@@ -31,4 +42,5 @@ class DisplayableFactory(factory.Factory):
     title = factory.Sequence(lambda n: 'displayable%d' % n)
     short_title = factory.Sequence(lambda n: 'short title%d' % n)
     slug = factory.Sequence(lambda n: 'slug%d' % n)
+    enabled = True
     template = TemplateFactory()
