@@ -4,9 +4,9 @@ Installation
 
 At the command line::
 
-    $ easy_install django-publica-displays
+    $ easy_install django-publica-views
 
 Or, if you have virtualenvwrapper installed::
 
-    $ mkvirtualenv django-publica-displays
-    $ pip install django-publica-displays
+    $ mkvirtualenv django-publica-views
+    $ pip install django-publica-views

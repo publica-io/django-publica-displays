@@ -1,11 +1,11 @@
 import random
-import string
 import factory
 
 from models import View, Viewable, ViewLinkage
 from templates.models import Template
 
-class DisplayFactory(factory.Factory):
+
+class ViewFactory(factory.Factory):
     class Meta:
         model = View
 
@@ -15,11 +15,12 @@ class DisplayFactory(factory.Factory):
     blurb = factory.Sequence(lambda n: 'blurb%d' % n)
     slug = factory.Sequence(lambda n: 'slug%d' % n)
 
-class ContentFactory(factory.Factory):
+
+class ViewLinkageFactory(factory.Factory):
     class Meta:
         model = ViewLinkage
 
-    display = DisplayFactory()
+    view = ViewFactory()
 
     content_type = None
     object_id = 0
@@ -35,7 +36,7 @@ class TemplateFactory(factory.Factory):
     content = factory.Sequence(lambda n: 'this is some content%d' % n)
 
 
-class DisplayableFactory(factory.Factory):
+class ViewableFactory(factory.Factory):
     class Meta:
         model = Viewable
 

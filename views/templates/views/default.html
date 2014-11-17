@@ -1,5 +1,5 @@
-<div id='display-{{display.slug}}'>
-{% for content in display.contents %}
+<div id='view-{{view.slug}}'>
+{% for content in view.contents %}
     {{ content.render|safe }}
 {% endfor %}
 </div>

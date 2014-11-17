@@ -24,7 +24,7 @@ clean-pyc:
 	find . -name '*~' -exec rm -f {} +
 
 lint:
-	flake8 django-publica-displays tests
+	flake8 django-publica-views tests
 
 test:
 	python runtests.py test
@@ -33,15 +33,15 @@ test-all:
 	tox
 
 coverage:
-	coverage run --source django-publica-displays setup.py test
+	coverage run --source django-publica-views setup.py test
 	coverage report -m
 	coverage html
 	open htmlcov/index.html
 
 docs:
-	rm -f docs/django-publica-displays.rst
+	rm -f docs/django-publica-views.rst
 	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ django-publica-displays
+	sphinx-apidoc -o docs/ django-publica-views
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 	open docs/_build/html/index.html

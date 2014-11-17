@@ -1,33 +1,33 @@
 =============================
-django-publica-displays
+django-publica-views
 =============================
 
-.. image:: https://badge.fury.io/py/django-publica-displays.png
-    :target: https://badge.fury.io/py/django-publica-displays
+.. image:: https://badge.fury.io/py/django-publica-views.png
+    :target: https://badge.fury.io/py/django-publica-views
 
-.. image:: https://travis-ci.org/harshadbhatia/django-publica-displays.png?branch=master
-    :target: https://travis-ci.org/harshadbhatia/django-publica-displays
+.. image:: https://travis-ci.org/harshadbhatia/django-publica-views.png?branch=master
+    :target: https://travis-ci.org/harshadbhatia/django-publica-views
 
-.. image:: https://coveralls.io/repos/harshadbhatia/django-publica-displays/badge.png?branch=master
-    :target: https://coveralls.io/r/harshadbhatia/django-publica-displays?branch=master
+.. image:: https://coveralls.io/repos/harshadbhatia/django-publica-views/badge.png?branch=master
+    :target: https://coveralls.io/r/harshadbhatia/django-publica-views?branch=master
 
 Your project description goes here
 
 Documentation
 -------------
 
-The full documentation is at https://django-publica-displays.readthedocs.org.
+The full documentation is at https://django-publica-views.readthedocs.org.
 
 Quickstart
 ----------
 
-Install django-publica-displays::
+Install django-publica-views::
 
-    pip install django-publica-displays
+    pip install django-publica-views
 
 Then use it in a project::
 
-    import django-publica-displays
+    import django-publica-views
 
 Features
 --------

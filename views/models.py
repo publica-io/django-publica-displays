@@ -1,12 +1,11 @@
 from django.db import models
 from django.contrib.contenttypes import generic
-from django.template import Context
-from django.template.loader import get_template
 
 from templates.mixins import TemplateMixin
 
 from entropy.base import (
-    AttributeMixin, EnabledMixin, OrderingMixin, TitleMixin, SlugMixin, TextMixin
+    AttributeMixin, EnabledMixin, OrderingMixin,
+    TitleMixin, SlugMixin, TextMixin
 )
 
 from settings import CONTENT_MODELS
@@ -27,11 +26,11 @@ from settings import CONTENT_MODELS
 
 
 class View(AttributeMixin, EnabledMixin, TitleMixin, SlugMixin, TemplateMixin):
-    '''
+    """
     A View of ViewLinkage or Widgets with a given template.
 
     Some templates accept parameters, such as slideshow duration
-    '''
+    """
 
     blurb = models.TextField(blank=True, default='')
 
@@ -45,13 +44,12 @@ class View(AttributeMixin, EnabledMixin, TitleMixin, SlugMixin, TemplateMixin):
         ]
 
 
-
 class ViewLinkage(EnabledMixin, OrderingMixin):
-    '''
+    """
     ViewLinkage for View
-    '''
+    """
 
-    display = models.ForeignKey('View')
+    view = models.ForeignKey('View')
 
     content_type = models.ForeignKey(
         'contenttypes.ContentType',
@@ -72,12 +70,14 @@ class ViewLinkage(EnabledMixin, OrderingMixin):
             # Warning we're failing silently here.
             return ''
             # TODO
-            # If no render method exists; inspect the object for some fields and try
+            # If no render method exists; inspect
+            # the object for some fields and try
             # to render a suitable preview.
 
 
 class Viewable(TemplateMixin, TitleMixin, SlugMixin, TextMixin, EnabledMixin):
-    '''
-    This is a sample test model which defines a content type for our display and is used for testing purposes.
-    '''
+    """
+    This is a sample test model which defines a content
+    type for our display and is used for testing purposes.
+    """
     pass

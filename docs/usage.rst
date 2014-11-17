@@ -2,6 +2,6 @@
 Usage
 ========
 
-To use django-publica-displays in a project::
+To use django-publica-views in a project::
 
-    import django-publica-displays
+    import django-publica-views

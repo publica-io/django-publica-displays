@@ -3,4 +3,4 @@ include CONTRIBUTING.rst
 include HISTORY.rst
 include LICENSE
 include README.rst
-recursive-include displays *.html *.png *.gif *js *.css *jpg *jpeg *svg *py
+recursive-include views *.html *.png *.gif *js *.css *jpg *jpeg *svg *py
