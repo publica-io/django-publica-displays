@@ -4,14 +4,14 @@
 import os
 import sys
 
-import displays
+import views
 
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
 
-version = displays.__version__
+version = views.__version__
 
 if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
@@ -24,22 +24,22 @@ readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
-    name='django-publica-displays',
+    name='django-publica-views',
     version=version,
     description="""Your project description goes here""",
     long_description=readme + '\n\n' + history,
     author='Harshad Bhatia',
     author_email='harshad@commoncode.com.au',
-    url='https://github.com/harshadbhatia/django-publica-displays',
+    url='https://github.com/harshadbhatia/django-publica-views',
     packages=[
-        'displays',
+        'views',
     ],
     include_package_data=True,
     install_requires=[
     ],
     license="BSD",
     zip_safe=False,
-    keywords='django-publica-displays',
+    keywords='django-publica-views',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Framework :: Django',

@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """
-test_django-publica-displays
+test_django-publica-views
 ------------
 
-Tests for `django-publica-displays` models module.
+Tests for `django-publica-views` models module.
 """
 
 import unittest
@@ -13,9 +13,9 @@ import unittest
 from django.contrib.contenttypes.models import ContentType
 
 from templates.models import Template
-from displays import models
-from displays import factories
-from displays.templatetags.displays_tags import display
+from views import models
+from views import factories
+from views.templatetags.displays_tags import display
 
 
 class TestDisplays(unittest.TestCase):
@@ -46,8 +46,8 @@ class TestDisplayable(unittest.TestCase):
     '''
     A displayable is a made up of one or more displayable which is linked to a display through content type
      _________________________________________________
-    |Display  |            |  |           |           |
-    |         | Displayable|  |Displayable|           |
+    |View     |            |  |           |           |
+    |         | Viewable|  |  |  Viewable |           |
     |         |            |  |           |           |
     |         |            |  |           |           |
     |          ------------    -----------            |
@@ -60,7 +60,7 @@ class TestDisplayable(unittest.TestCase):
         self.t2, _ = Template.objects.get_or_create(
             name='templates/test_preview.html', content='preview')
 
-        self.display = models.Display(title='Title1',
+        self.display = models.View(title='Title1',
                                short_title='Shorty',
                                enabled=False,
                                blurb='This is big blurb..',
@@ -77,9 +77,9 @@ class TestDisplayable(unittest.TestCase):
     def test_display_created(self):
 
         self.t1, _ = Template.objects.get_or_create(
-            name='displays/default.html', content='')
+            name='views/default.html', content='')
 
-        self.display = models.Display(title='Test2',
+        self.display = models.View(title='Test2',
                                short_title='Shorty',
                                enabled=True,
                                blurb='This is big blurb..',
@@ -89,21 +89,21 @@ class TestDisplayable(unittest.TestCase):
         self.display.save()
 
         self.t2, _ = Template.objects.get_or_create(
-            name='displays/test.html', content='')
+            name='views/test.html', content='')
 
         self.t2.save()
 
         for x in range(10):
             # Create a displayable with some stuff.
-            self.displayable = models.Displayable(short_title='short title',
+            self.displayable = models.Viewable(short_title='short title',
                                                   enabled=True,
                                                   slug='slug'
             )
             self.displayable.template = self.t2
             self.displayable.preview_template = self.t2
             self.displayable.save()
-            # Create the linkage between the Display and Displayble though content
-            self.content = models.Content(display=self.display,
+            # Create the linkage between the View and Displayble though content
+            self.content = models.ViewLinkage(display=self.display,
                                           content_type=ContentType.objects.get_for_model(self.displayable),
                                           object_id=self.displayable.id)
             self.content.save()
@@ -119,4 +119,4 @@ class TestDisplayable(unittest.TestCase):
 
     def tearDown(self):
         pass
-        # models.Display.objects.all().delete()
+        # models.View.objects.all().delete()
