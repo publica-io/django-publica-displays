@@ -19,12 +19,11 @@ from views.templatetags.views_tags import view
 
 
 class TestViews(unittest.TestCase):
-
     def setUp(self):
         self.view = factories.ViewFactory(title='Title1',
-                                             short_title='Shorty',
-                                             enabled=False,
-                                             blurb='This is big blurb..')
+                                          short_title='Shorty',
+                                          enabled=False,
+                                          blurb='This is big blurb..')
 
     def test_title(self):
         self.assertEqual(self.view.title, 'Title1')
@@ -65,29 +64,27 @@ class TestViewable(unittest.TestCase):
             name='views/default.html', content='Default')
 
         self.view1, _ = models.View.objects.get_or_create(title='Title1',
-                                short_title='Shorty',
-                                enabled=False,
-                                blurb='This is big blurb..',
-                                slug='home',
-                                template = self.t1,
-                                preview_template = self.t1)
-
-
+                                                          short_title='Shorty',
+                                                          enabled=False,
+                                                          blurb='This is big blurb..',
+                                                          slug='home',
+                                                          template=self.t1,
+                                                          preview_template=self.t1)
 
         self.view2, _ = models.View.objects.get_or_create(title='Test2',
-                                short_title='Shorty',
-                                enabled=True,
-                                blurb='This is big blurb..',
-                                slug='MainTest',
-                                template=self.t3,
-                                preview_template=self.t3
+                                                          short_title='Shorty',
+                                                          enabled=True,
+                                                          blurb='This is big blurb..',
+                                                          slug='MainTest',
+                                                          template=self.t3,
+                                                          preview_template=self.t3
         )
 
         self.viewable, _ = models.Viewable.objects.get_or_create(short_title='short title',
-                                                              enabled=True,
-                                                              slug='slug',
-                                                              template = self.t2,
-                                                              preview_template = self.t2)
+                                                                 enabled=True,
+                                                                 slug='slug',
+                                                                 template=self.t2,
+                                                                 preview_template=self.t2)
 
         for x in range(10):
             # Create a displayable with some stuff.
