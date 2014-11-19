@@ -4,8 +4,7 @@ from django.contrib.contenttypes import generic
 from templates.mixins import TemplateMixin
 
 from entropy.base import (
-    AttributeMixin, EnabledMixin, OrderingMixin,
-    TitleMixin, SlugMixin, TextMixin
+    EnabledMixin, OrderingMixin, TitleMixin, SlugMixin, TextMixin
 )
 
 from settings import CONTENT_MODELS
@@ -25,7 +24,7 @@ from settings import CONTENT_MODELS
 #         return self.links.values_list('pk', flat=True)
 
 
-class View(AttributeMixin, EnabledMixin, TitleMixin, SlugMixin, TemplateMixin):
+class View(EnabledMixin, TitleMixin, SlugMixin, TemplateMixin):
     """
     A View of ViewLinkage or Widgets with a given template.
 
