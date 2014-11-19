@@ -48,7 +48,7 @@ class ViewLinkage(EnabledMixin, OrderingMixin):
     ViewLinkage for View
     """
 
-    view = models.ForeignKey('View')
+    view = models.ForeignKey('View', related_name='linkages')
 
     content_type = models.ForeignKey(
         'contenttypes.ContentType',
