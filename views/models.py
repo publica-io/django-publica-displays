@@ -3,7 +3,7 @@ from django.contrib.contenttypes import generic
 
 from templates.mixins import TemplateMixin
 
-from entropy.base import (
+from entropy.mixins import (
     EnabledMixin, OrderingMixin, TitleMixin, SlugMixin, TextMixin
 )
 
