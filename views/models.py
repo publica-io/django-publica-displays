@@ -24,7 +24,7 @@ from settings import CONTENT_MODELS
 #         return self.links.values_list('pk', flat=True)
 
 
-class View(EnabledMixin, TitleMixin, SlugMixin, TemplateMixin):
+class View(GenericAttrMixin, EnabledMixin, TitleMixin, SlugMixin, TemplateMixin):
     """
     A View of ViewLinkage or Widgets with a given template.
 
@@ -59,12 +59,12 @@ class ViewLinkage(EnabledMixin, OrderingMixin):
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    def render(self):
+    def render(self, context=None):
         '''
         The method would render the html of the content
         '''
         try:
-            return self.content_object.render()
+            return self.content_object.render(context)
         except AttributeError:
             # Warning we're failing silently here.
             return ''

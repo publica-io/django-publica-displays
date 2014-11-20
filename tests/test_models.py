@@ -97,17 +97,17 @@ class TestViewable(unittest.TestCase):
 
 
     def test_view_tag(self):
-        self.assertEqual('test', view('home'))
+        self.assertEqual('test', view('context', 'home'))
 
     def test_view_created(self):
-        self.assertTrue('view-MainTest' in view('MainTest'))
+        self.assertTrue('view-MainTest' in view('context', 'MainTest'))
 
     def test_template_rendered(self):
         self.assertTrue('This is a test html template for content viewable'
-                        in view('MainTest'))
+                        in view('context', 'MainTest'))
 
     def test_template_rendered_count(self):
-        self.assertEqual(view('MainTest').count(
+        self.assertEqual(view('context', 'MainTest').count(
             'This is a test html template for content viewable'), 10)
 
     def tearDown(self):
