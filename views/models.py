@@ -33,7 +33,7 @@ class View(GenericAttrMixin, EnabledMixin, TitleMixin, SlugMixin, TemplateMixin)
 
     blurb = models.TextField(blank=True, default='')
 
-    def contents(self):
+    def linked_objects(self):
         '''
         Return the content for this display
         '''

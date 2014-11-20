@@ -1,5 +1,5 @@
 <div id='view-{{view.slug}}'>
-{% for content in view.contents %}
-    {{ content.render|safe }}
+{% for viewlinkage in view.linkages %}
+    {{ viewlinakge.render|safe }}
 {% endfor %}
 </div>

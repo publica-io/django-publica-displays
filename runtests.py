@@ -18,7 +18,8 @@ try:
             "django.contrib.sites",
             "views",
             'templates',
-            'entropy'
+            'entropy',
+            'attrs'
         ],
         SITE_ID=1,
         NOSE_ARGS=['-s'],

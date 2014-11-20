@@ -107,6 +107,7 @@ class TestViewable(unittest.TestCase):
                         in view('context', 'MainTest'))
 
     def test_template_rendered_count(self):
+        print view('context', 'MainTest')
         self.assertEqual(view('context', 'MainTest').count(
             'This is a test html template for content viewable'), 10)
 
