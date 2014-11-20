@@ -33,15 +33,6 @@ class View(GenericAttrMixin, EnabledMixin, TitleMixin, SlugMixin, TemplateMixin)
 
     blurb = models.TextField(blank=True, default='')
 
-    def contents(self):
-        '''
-        Return the content for this display
-        '''
-        return [
-            content for content in
-            self.viewlinkage_set.prefetch_related('content_object')
-        ]
-
 
 class ViewLinkage(EnabledMixin, OrderingMixin):
     """
