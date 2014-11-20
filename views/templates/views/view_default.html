@@ -1,0 +1,11 @@
+{% load views_tags %}
+
+<div id='view-{{view.slug}}'>
+
+{% for linkage in view.linkages.all %}
+    
+    {% linkage linkage %}
+
+{% endfor %}
+
+</div>

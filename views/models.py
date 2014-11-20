@@ -3,6 +3,7 @@ from django.contrib.contenttypes import generic
 
 from templates.mixins import TemplateMixin
 
+from attrs.mixins import GenericAttrMixin
 from entropy.mixins import (
     EnabledMixin, OrderingMixin, TitleMixin, SlugMixin, TextMixin
 )
@@ -10,28 +11,26 @@ from entropy.mixins import (
 from settings import CONTENT_MODELS
 
 
-# class DisplayInstance(models.Model):
+# class ViewInstance(models.Model):
 #     '''
-#     Displays are reuseable
+#     Views are reuseable
 #     '''
-#
-#     display = models.ForeignKey('View')
-#     platform = models.ForeignKey('platforms.Platform')
+#     view = models.ForeignKey('View')
+#     channel = models.ForeignKey('channels.Channel')
 #     position = models.ForeignKey('positions.Position')
 #     links = models.ManyToManyField('menus.Link', blank=True, null=True)
-#
+
 #     def link_ids(self):
 #         return self.links.values_list('pk', flat=True)
 
 
-class View(GenericAttrMixin, EnabledMixin, TitleMixin, SlugMixin, TemplateMixin):
+class View(GenericAttrMixin, EnabledMixin, TitleMixin, SlugMixin, TextMixin, TemplateMixin):
     """
     A View of ViewLinkage or Widgets with a given template.
 
     Some templates accept parameters, such as slideshow duration
     """
-
-    blurb = models.TextField(blank=True, default='')
+    pass
 
 
 class ViewLinkage(EnabledMixin, OrderingMixin):
@@ -57,17 +56,6 @@ class ViewLinkage(EnabledMixin, OrderingMixin):
         try:
             return self.content_object.render(context)
         except AttributeError:
-            # Warning we're failing silently here.
+            # We're choosing to fail silently here
             return ''
-            # TODO
-            # If no render method exists; inspect
-            # the object for some fields and try
-            # to render a suitable preview.
 
-
-class Viewable(TemplateMixin, TitleMixin, SlugMixin, TextMixin, EnabledMixin):
-    """
-    This is a sample test model which defines a content
-    type for our display and is used for testing purposes.
-    """
-    pass
