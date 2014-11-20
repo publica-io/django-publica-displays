@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.contenttypes import generic
 
 from templates.mixins import TemplateMixin
-from attrs.mixins import GenericAttrMixin
-from entropy.base import (
+
+from entropy.mixins import (
     EnabledMixin, OrderingMixin, TitleMixin, SlugMixin, TextMixin
 )
 
@@ -48,7 +48,7 @@ class ViewLinkage(EnabledMixin, OrderingMixin):
     ViewLinkage for View
     """
 
-    view = models.ForeignKey('View')
+    view = models.ForeignKey('View', related_name='linkages')
 
     content_type = models.ForeignKey(
         'contenttypes.ContentType',
