@@ -7,7 +7,7 @@ factory_boy
 #-e git://github.com/publica-io/django-publica-menus.git#egg=menus
 #-e git://github.com/publica-io/django-publica-channels.git#egg=channels
 #-e git://github.com/publica-io/django-publica-positions.git#egg=positions
-#-e git://github.com/publica-io/django-publica-images.git#egg=mages
+-e git://github.com/publica-io/django-publica-images.git#egg=images
 -e git://github.com/publica-io/django-entropy.git#egg=entropy
 -e git://github.com/publica-io/django-publica-templates.git#egg=templates
 -e git://github.com/publica-io/django-attrs.git#egg=attrs

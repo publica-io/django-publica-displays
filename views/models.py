@@ -7,6 +7,7 @@ from attrs.mixins import GenericAttrMixin
 from entropy.mixins import (
     EnabledMixin, OrderingMixin, TitleMixin, SlugMixin, TextMixin
 )
+from images import ImageMixin
 
 from settings import CONTENT_MODELS
 
@@ -24,7 +25,7 @@ from settings import CONTENT_MODELS
 #         return self.links.values_list('pk', flat=True)
 
 
-class View(GenericAttrMixin, EnabledMixin, TitleMixin, SlugMixin, TextMixin, TemplateMixin):
+class View(GenericAttrMixin, EnabledMixin, TitleMixin, SlugMixin, TextMixin, TemplateMixin, ImageMixin):
     """
     A View of ViewLinkage or Widgets with a given template.
 
@@ -58,4 +59,3 @@ class ViewLinkage(EnabledMixin, OrderingMixin):
         except AttributeError:
             # We're choosing to fail silently here
             return ''
-
