@@ -7,7 +7,7 @@ from attrs.mixins import GenericAttrMixin
 from entropy.mixins import (
     EnabledMixin, OrderingMixin, TitleMixin, SlugMixin, TextMixin
 )
-from images import ImageMixin
+from images.mixins import ImageMixin
 
 from settings import CONTENT_MODELS
 
