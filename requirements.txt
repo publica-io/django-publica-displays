@@ -11,4 +11,3 @@ factory_boy
 -e git://github.com/publica-io/django-entropy.git#egg=entropy
 -e git://github.com/publica-io/django-publica-templates.git#egg=templates
 -e git://github.com/publica-io/django-attrs.git#egg=attrs
--e git://github.com/publica-io/django-modals.git#egg=modals
