@@ -26,8 +26,11 @@ class PageView(models.Model):
         help_text='The Page Content View to link to the Page')
 
     class Meta:
-        verbose_name = 'Attached page content view'
-        verbose_name_plural = 'Attached page content views'
+        verbose_name = 'Attached Page Content View'
+        verbose_name_plural = 'Attachable Page Content Views'
+
+    def __unicode__(self):
+        return '"{}" (Content View/Widgets) at the "{}" page position on the "{}" page'.format(self.view.title, self.position.title, self.page.title)
 
 
 class View(GenericAttrMixin, EnabledMixin, TitleMixin, SlugMixin, TextMixin, TemplateMixin):
@@ -37,8 +40,8 @@ class View(GenericAttrMixin, EnabledMixin, TitleMixin, SlugMixin, TextMixin, Tem
     Some templates accept parameters, such as slideshow duration
     '''
     class Meta:
-        verbose_name = 'Page content view'
-        verbose_name_plural = 'Page content views'
+        verbose_name = 'Page Content View'
+        verbose_name_plural = 'Page Content Views that use Content Widgets'
 
 
 class ViewLinkage(EnabledMixin, OrderingMixin):
@@ -60,8 +63,8 @@ class ViewLinkage(EnabledMixin, OrderingMixin):
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
     class Meta:
-        verbose_name = 'Link to content'
-        verbose_name_plural = 'Links to content'
+        verbose_name = 'Link to Content Widget'
+        verbose_name_plural = 'Links to Content Widgets'
 
 
     def render(self, context=None):
