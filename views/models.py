@@ -11,32 +11,40 @@ from entropy.mixins import (
 from settings import CONTENT_MODELS
 
 
-# class ViewInstance(models.Model):
-#     '''
-#     Views are reuseable
-#     '''
-#     view = models.ForeignKey('View')
-#     channel = models.ForeignKey('channels.Channel')
-#     position = models.ForeignKey('positions.Position')
-#     links = models.ManyToManyField('menus.Link', blank=True, null=True)
+class PageView(models.Model):
 
-#     def link_ids(self):
-#         return self.links.values_list('pk', flat=True)
+    position = models.ForeignKey(
+        'positions.Position',
+        help_text='The Named Position upon the Page whereas the Page Content View will appear')
+
+    page = models.ForeignKey(
+        'pages.Page',
+        help_text='The Page to link the Page Content View')
+
+    view = models.ForeignKey(
+        'View',
+        help_text='The Page Content View to link to the Page')
+
+    class Meta:
+        verbose_name = 'Attached page content view'
+        verbose_name_plural = 'Attached page content views'
 
 
 class View(GenericAttrMixin, EnabledMixin, TitleMixin, SlugMixin, TextMixin, TemplateMixin):
-    """
+    '''
     A View of ViewLinkage or Widgets with a given template.
 
     Some templates accept parameters, such as slideshow duration
-    """
-    pass
+    '''
+    class Meta:
+        verbose_name = 'Page content view'
+        verbose_name_plural = 'Page content views'
 
 
 class ViewLinkage(EnabledMixin, OrderingMixin):
-    """
+    '''
     ViewLinkage for View
-    """
+    '''
 
     view = models.ForeignKey('View', related_name='linkages')
 
@@ -44,10 +52,17 @@ class ViewLinkage(EnabledMixin, OrderingMixin):
         'contenttypes.ContentType',
         limit_choices_to={'model__in': CONTENT_MODELS},
         blank=True,
+        help_text='Choose the Content Type of the content to link to in the Page Content View',
         null=True
     )
-    object_id = models.PositiveIntegerField()
+    object_id = models.PositiveIntegerField(
+        help_text='Choose the Content Object to link to')
     content_object = generic.GenericForeignKey('content_type', 'object_id')
+
+    class Meta:
+        verbose_name = 'Link to content'
+        verbose_name_plural = 'Links to content'
+
 
     def render(self, context=None):
         '''
