@@ -39,8 +39,11 @@ def set_template(linkage, template):
     '''
     ..TODO.. confirm and change checking of template through template model
     '''
-    if template and linkage.content_object.template:
-        linkage.content_object.template.path = template
+    try:
+        if template and linkage.content_object.template:
+            linkage.content_object.template.path = template
+    except AttributeError:
+        pass
     return linkage
 
 
