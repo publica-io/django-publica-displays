@@ -50,25 +50,27 @@ def view_proxy(context, proxy_view_slug, *args, **kwargs):
     The method takes as input a proxy view slug which is the view whose widgets have been featured_on_homepage
     are to be displayed.
     Currently it displays the top 4 widgets with a specified template which is done through
-    View template
+    View template, Also , added view_links inside 
     '''
     view = View.objects.get(slug=proxy_view_slug)
     html = []
     counter = 1
-    templates = {
-        'template_1' : kwargs.get('template_1', None),
-        'template_2' : kwargs.get('template_2', None),
-        'template_3' : kwargs.get('template_3', None),
-        'template_4' : kwargs.get('template_4', None)
-    }
-    
-    for linkage in view.linkages.all():
-        if linkage.content_object.featured_on_homepage:
+    templates = {}
+    view_links = kwargs.get('view_links', 0)
 
-            if 'template_%s' % counter in templates.keys():
-                linkage = set_template(linkage, templates['template_%s' % counter])
-                html.append(linkage.render(context))
-            counter += 1
+    for template_key, template_name in kwargs.iteritems():
+        if template_key.startswith('template_'):
+            templates[template_key] = template_name
+    
+    if templates:
+        for linkage in view.linkages.all():
+            if counter > view_links:
+                break
+            elif linkage.content_object.featured_on_homepage:
+                if 'template_%s' % counter in templates.keys():
+                    linkage = set_template(linkage, templates['template_%s' % counter])
+                    html.append(linkage.render(context))
+                counter += 1
 
     widget_proxy = ''.join(html)
     # Get rest of the content
