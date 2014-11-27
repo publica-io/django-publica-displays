@@ -57,6 +57,7 @@ def view_proxy(context, proxy_view_slug, *args, **kwargs):
         view = View.objects.get(slug=proxy_view_slug)
     except View.DoesNotExist:
         pass
+    else:
         html = []
         counter = 1
         templates = {}
