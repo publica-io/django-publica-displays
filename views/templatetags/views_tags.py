@@ -47,7 +47,7 @@ def set_template(linkage, template):
 @register.simple_tag(takes_context=True)
 def view_proxy(context, proxy_view_slug, *args, **kwargs):
     '''
-    The method takes as input a proxy view slug which is the view whose widgets have been featured_on_homepage
+    The method takes as input a proxy view slug which is the view whose widgets have been featured
     are to be displayed.
     Currently it displays the top 4 widgets with a specified template which is done through
     View template, Also , added view_links inside 
@@ -66,7 +66,7 @@ def view_proxy(context, proxy_view_slug, *args, **kwargs):
         for linkage in view.linkages.all():
             if counter > view_links:
                 break
-            elif linkage.content_object.featured_on_homepage:
+            elif linkage.content_object.featured:
                 if 'template_%s' % counter in templates.keys():
                     linkage = set_template(linkage, templates['template_%s' % counter])
                     html.append(linkage.render(context))
