@@ -40,7 +40,7 @@ def set_template(linkage, template):
     ..TODO.. confirm and change checking of template through template model
     '''
     if template and linkage.content_object.template:
-        linkage.content_object.template._name = template
+        linkage.content_object.template.path = template
     return linkage
 
 
