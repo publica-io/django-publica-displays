@@ -52,7 +52,7 @@ def view_proxy(context, proxy_view_slug, *args, **kwargs):
     Currently it displays the top 4 widgets with a specified template which is done through
     View template, Also , added view_links inside 
     '''
-    view_proxy_html = []
+    view_proxy_html = ''
     try:
         view = View.objects.get(slug=proxy_view_slug)
     except View.DoesNotExist:
