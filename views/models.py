@@ -11,7 +11,7 @@ from entropy.mixins import (
 from settings import CONTENT_MODELS
 
 
-class PageView(models.Model):
+class PageView(OrderingMixin):
 
     position = models.ForeignKey(
         'positions.Position',
@@ -26,6 +26,7 @@ class PageView(models.Model):
         help_text='The Page Content View to link to the Page')
 
     class Meta:
+        ordering = ('order', )
         verbose_name = 'Attached Page Content View'
         verbose_name_plural = 'Attachable Page Content Views'
 
