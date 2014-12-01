@@ -9,6 +9,12 @@ from entropy.mixins import (
 )
 from images.mixins import ImageMixin
 
+try:
+    from publica_admin.mixins import PublicaAdminMixin
+except ImportError:
+    PublicaAdminMixin = object
+
+
 from settings import CONTENT_MODELS
 
 
@@ -35,7 +41,7 @@ class PageView(OrderingMixin):
         return '"{}" (Content View/Widgets) at the "{}" page position on the "{}" page'.format(self.view.title, self.position.title, self.page.title)
 
 
-class View(GenericAttrMixin, EnabledMixin, TitleMixin, SlugMixin, TextMixin, TemplateMixin, ImageMixin):
+class View(GenericAttrMixin, EnabledMixin, TitleMixin, SlugMixin, TextMixin, TemplateMixin, ImageMixin, PublicaAdminMixin):
     '''
     A View of ViewLinkage or Widgets with a given template.
 
