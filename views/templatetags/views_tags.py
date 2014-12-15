@@ -74,7 +74,7 @@ def view_proxy(context, proxy_view_slug, *args, **kwargs):
             for linkage in view.linkages.all():
                 if counter > view_links:
                     break
-                elif linkage.content_object.featured:
+                elif linkage.content_object and linkage.content_object.featured:
                     if 'template_%s' % counter in templates.keys():
                         linkage = set_template(linkage, templates['template_%s' % counter])
                         html.append(linkage.render(context))
